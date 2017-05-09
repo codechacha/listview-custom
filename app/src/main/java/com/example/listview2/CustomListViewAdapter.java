@@ -15,20 +15,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CustomListViewAdapter extends BaseAdapter {
-    private ArrayList<ListViewItem> mListViewItems;
+    private ArrayList<SampleItem> mSampleItems;
 
-    public CustomListViewAdapter(ArrayList<ListViewItem> items) {
-        mListViewItems = items;
+    public CustomListViewAdapter(ArrayList<SampleItem> items) {
+        mSampleItems = items;
     }
 
     @Override
     public int getCount() {
-        return mListViewItems.size();
+        return mSampleItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mListViewItems.get(position);
+        return mSampleItems.get(position);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class CustomListViewAdapter extends BaseAdapter {
         Button btnDelete = (Button) convertView.findViewById(R.id.btn_delete);
         btnDelete.setTag(position);
 
-        Drawable dr =  mListViewItems.get(position).mImage;
-        String content = mListViewItems.get(position).mContent;
+        Drawable dr =  mSampleItems.get(position).getThumbnail();
+        String content = mSampleItems.get(position).getTitle();
         ivImage.setImageDrawable(dr);
         tvContent.setText(content);
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -60,8 +60,7 @@ public class CustomListViewAdapter extends BaseAdapter {
 
                 if (count > 0) {
                     int selectedIndex = (int)v.getTag();
-                    Log.d("MainActivity", "ss : " + selectedIndex);
-                    mListViewItems.remove(selectedIndex);
+                    mSampleItems.remove(selectedIndex);
                     notifyDataSetChanged();
                 }
             }
@@ -70,8 +69,8 @@ public class CustomListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(ListViewItem item) {
-        mListViewItems.add(item);
+    public void addItem(SampleItem item) {
+        mSampleItems.add(item);
     }
 
 
